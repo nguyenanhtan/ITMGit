@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
+
+
 <div class="container">	
 	<div id="list-function" class="row">
 		<div class="col-md-3">				
