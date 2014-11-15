@@ -3,14 +3,16 @@ $("#btn-save").click(function(){
 	$(".sub-name").each(function(){
 		sub = $(this).val();
 		id = $(this).siblings(".id-st").val();
+		spv = $(this).parent("td").next("td").children('.spv-name').val();
+		alert(spv);
 		$.ajax({
 			url:'updateSubject.json',
-			data:{"sub":sub,"id":id},
+			data:{"sub":sub,"id":id,"spv":spv},
 			dataType: "json",
 			success:function(s,x){	
 				if(!$("#alert-mes").children(".alert").is(":visible"))
 				{
-					alertSuccess("Update success!")
+					alertSuccess("Update success! ");
 				}
 			},
 			error:function(data, textStatus, jqXHR){

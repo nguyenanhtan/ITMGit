@@ -40,7 +40,7 @@
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <beans:property name="url" value="jdbc:mysql://localhost:3306/itm_spring?useUnicode=true&amp;characterEncoding=utf-8"/>
         <beans:property name="username" value="root"/>
-        <beans:property name="password" value="1234567890"/>
+        <beans:property name="password" value=""/>
         <!--<beans:property name="validationQuery" value="SELECT 1"/>-->
     </beans:bean>
     <!-- Hibernate Session Factory -->

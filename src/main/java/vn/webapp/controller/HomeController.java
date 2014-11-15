@@ -111,6 +111,7 @@ public class HomeController {
 		List<Defensesession> listDefense = this.dfsvc.listDefensesessions();
 		model.addAttribute("listDefense", listDefense);
 		model.addAttribute("listProfessors", proSvc.listProfessors());
+		model.addAttribute("paramOne", "hehehehehe");
 		return "schedulejuries";
 	}
 	@RequestMapping(value = "/DefenseSessionsManager", method = RequestMethod.GET)
@@ -149,7 +150,7 @@ public class HomeController {
 		
 		model.addAttribute("listProfessors", proSvc.listProfessors());
 		model.addAttribute("listDegrees", proSvc.listDegrees());
-		model.addAttribute("listInstitute", inssvc.listInstitutes());
+		model.addAttribute("listInstitute", inssvc.listInstitutes());		
 		model.addAttribute("listCategory", subjectCategoriService.listSubjectCategories());
 		return "TeacherManager";
 	}

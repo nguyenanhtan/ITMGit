@@ -6,7 +6,7 @@
 	<div class="col-md-12" id="alert-mes">
 
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-10">
 		<div class="form-inline" id="form-ipt">
 		<div class="input-group">
 			  <span class="input-group-addon">Ten Sinh vien</span>
@@ -34,18 +34,18 @@
 					<input class="form-control sub-name" placeholder="Subject" value='<c:out value="${student.title}"/>'>
 					<input type="hidden" class="id-st" value='<c:out value="${student.id}"/>'>
 				</td>
-				<td>					
-					<input list="spv-list" id="spv-name" class="form-control" placeholder="Supervior Name">
-					  <datalist id="spv-list">
+				<td>										
+					<select class="form-control spv-name">
 					  	<c:forEach items="${listProfessors}" var="ps"> 
-						  <option class="opt" value='<c:out value="${ps.id}"/>' label='<c:out value="${ps.name}"/>'></option>
+						  <option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
 						</c:forEach> 
-					  </datalist>
+					</select>  
 				</td>
 				
 			</tr>
 			</c:forEach>
 		</table>
+
 		<!-- <div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">Giao nhan de tai</h3>

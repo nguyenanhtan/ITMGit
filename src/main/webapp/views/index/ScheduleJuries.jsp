@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+
   <div class="container">
   	<div class="row">
   		
@@ -56,8 +57,8 @@
 		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 		        <h4 class="modal-title" id="myModalLabel">Them giang vien vao hoi dong ngay 1/6/2015</h4>
 		      </div>
-		      <div class="modal-body">
-		        <div class="checkbox list-group-item">
+		      <div class="modal-body" id="list-teacher">
+		        <!-- <div class="checkbox list-group-item">
 				    <label>
 				      <input type="checkbox"> Nguyen Tuan Dung
 				    </label>
@@ -72,7 +73,7 @@
 				      <input type="checkbox"> Pham Dang Hai
 				    </label>
 				</div>
-
+ -->
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -81,7 +82,7 @@
 		    </div>
 		  </div>
 		</div>
-		<div class="btn btn-success">
+		<div class="btn btn-success" id="btn-save">
 			<span class="glyphicon glyphicon-ok"> </span> Luu lai
 		</div>
 
@@ -253,39 +254,7 @@
 
 <div id="box-list-jury">
 				<table id="list-jury" class="table table-hover">
-				<!-- <tr id="tr-head">
-				<th>
-					<p> </p>
-				</th>
-				<th>
-					<p>SHHV</p>
-				</th>
-				<th>
-					<p>Họ và tên</p>
-				</th>
-				<th>
-					<p>Tên đề tài</p>
-				</th>
-				<th>
-					<p>GVHD</p>
-					
-					
-				</th>
 				
-
-				<th>
-					<p>Chủ tịch</p>
-					
-				</th>
-
-				
-
-				<th>
-					<p>Kíp</p>
-					
-				</th>			
-				
-				</tr -->
 				<tr>
 					<!-- <td>
 					    <input type="checkbox"> 
@@ -422,5 +391,21 @@
  <button type="button" class="btn btn-default" id="backToTopBtn">
   <span class="glyphicon glyphicon-arrow-up"></span> Top
 </button>
-
+<script src="<c:url value="/assets/js/jquery-1.11.1.js"/>"></script>
 <%--  <script src="<c:url value="/assets/js/schedule.js"/>"></script> --%>
+<script type="text/javascript">
+	function Professor(id, name){
+		this.name = name;
+		this.id = id;
+		this.indefense = false;
+		this.htmlItemList = function(){
+			return '<div class="checkbox list-group-item"><label><input type="checkbox" value="'+id+'">'+name+'</input></label></div>';
+		};
+	}
+	var listProfessor = new Array();
+	<c:forEach items="${listProfessors}" var="ps"> 
+		var p = new Professor('<c:out value="${ps.id}"/>','<c:out value="${ps.name}"/>');
+		listProfessor.push(p);	
+		$("#list-teacher").append(p.htmlItemList);
+	</c:forEach>	
+</script>

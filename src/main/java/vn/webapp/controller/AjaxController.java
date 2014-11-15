@@ -292,6 +292,7 @@ public class AjaxController {
 		sc.setName(name);
 		//proSvc.persistProfessors(sc);
 		//System.out.println(sc.getId());
+		System.out.println(name);
 		Gson gs = new Gson();
 		
 		List<Object> x = gs.fromJson(mark, List.class);
@@ -355,12 +356,13 @@ public class AjaxController {
 	}
 	@RequestMapping(value = "/updateSubject", method = RequestMethod.GET)
     public @ResponseBody
-    SuperviseStudent updateSubject(@RequestParam(value = "id") String id, @RequestParam(value = "sub") String sub) {
+    SuperviseStudent updateSubject(@RequestParam(value = "id") String id, @RequestParam(value = "sub") String sub, @RequestParam(value = "spv") String spv) {
 		if(sub.length() > 0)
 		{
 			SuperviseStudent lStudent = new SuperviseStudent();
 			lStudent.setId(id);
 			lStudent.setTitle(sub);
+			
 			supStudentSvc.updateSuperviseStudent(lStudent);
 			return lStudent;
 		}else{

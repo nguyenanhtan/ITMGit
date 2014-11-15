@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import vn.webapp.model.Classes;
 import vn.webapp.model.Promotion;
 import vn.webapp.model.Status;
+import vn.webapp.model.StudentDefense;
 import vn.webapp.model.SuperviseStudent;
 import vn.webapp.model.Type;
 
@@ -28,6 +29,9 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 	public void persistSuperviseStudent(SuperviseStudent superviseStudent) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().persist(superviseStudent);
+		StudentDefense sdf = new StudentDefense();
+		sdf.setStudentID(superviseStudent.getId());
+		sessionFactory.getCurrentSession().persist(sdf);
 	}
 
 	@Override
