@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF/spring/servlets
+END
+servlet-json.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF/spring/servlets/servlet-json.xml
+END
+servlet-context.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF/spring/servlets/servlet-context.xml
+END

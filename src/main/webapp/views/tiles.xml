@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="layout.base" template="/views/cp/layout/base.jsp">           
+        <put-attribute name="header" value="/views/cp/widget/header.jsp" />
+        <put-attribute name="mainmenu" value="/views/cp/widget/mainmenu.jsp" />                                       
+        <put-attribute name="footer" value="/views/cp/widget/footer.jsp" />        
+    </definition> 
+    
+    <!-- Users module -->   
+    <definition name="cp.index" extends="layout.base">
+        <put-attribute name="title" value="User - All users" />                                 
+        <put-attribute name="content" value="/views/cp/user/list.jsp" />
+    </definition>
+    <definition name="cp.userdetail" extends="layout.base">
+        <put-attribute name="title" value="User - Detail" />                                 
+        <put-attribute name="content" value="/views/cp/user/detail.jsp" />
+    </definition>
+    <definition name="cp.addnewuser" extends="layout.base">
+        <put-attribute name="title" value="Add a new user" />                                 
+        <put-attribute name="content" value="/views/cp/user/addnewuser.jsp" />
+    </definition>
+         
+    <definition name="signin" template="/views/cp/signin.jsp">
+        <put-attribute name="title" value="Login" />        
+    </definition>
+    <definition name="layout" template="/views/index/layout/layout.jsp">
+        <put-attribute name="mainmenu" value="/views/index/layout/header.jsp" />                                     
+    </definition>
+    <definition name="index" extends="layout">
+    	 <put-attribute name="body" value="/views/index/index.jsp" /> 
+    	 <put-attribute name="style" value="/assets/css/home.css" /> 
+        <put-attribute name="title" value="Hệ thống quản lý đào tạo cao học" />        
+    </definition>
+    <definition name="schedulejuries" extends="layout">
+    	 <put-attribute name="body" value="/views/index/ScheduleJuries.jsp" /> 
+    	 <put-attribute name="style" value="/assets/css/schedulejuries.css" /> 
+        <put-attribute name="title" value="Xếp lịch" />   
+        <put-attribute name="script" value="/assets/js/schedule.js" />   
+    </definition>
+    <definition name="DefenseSessionsManager" extends="layout">
+    	 <put-attribute name="body" value="/views/index/DefenseSessionsManager.jsp" /> 
+    	 <put-attribute name="style" value="/assets/css/defensesession.css" /> 
+        <put-attribute name="title" value="Các đợt bảo vệ" />   
+        <put-attribute name="script" value="/assets/js/defensesession.js" />   
+    </definition>
+    <definition name="StudentManager" extends="layout">
+         <put-attribute name="body" value="/views/index/StudentManager.jsp" /> 
+         <put-attribute name="style" value="/assets/css/StudentManager.css" /> 
+        <put-attribute name="title" value="Quan ly sinh vien" />   
+        <put-attribute name="script" value="/assets/js/StudentManager.js" />   
+    </definition>
+    <definition name="StructureManager" extends="layout">
+         <put-attribute name="body" value="/views/index/StructureManager.jsp" /> 
+         <put-attribute name="style" value="/assets/css/StructureManager.css" /> 
+        <put-attribute name="title" value="Quan ly to chuc hanh chinh" />   
+        <put-attribute name="script" value="/assets/js/StructureManager.js" />   
+    </definition>
+    <definition name="TeacherManager" extends="layout">
+         <put-attribute name="body" value="/views/index/TeacherManager.jsp" /> 
+         <put-attribute name="style" value="/assets/css/TeacherManager.css" /> 
+        <put-attribute name="title" value="Giang vien" />   
+        <put-attribute name="script" value="/assets/js/TeacherManager.js" />   
+    </definition>
+    <definition name="SubjectCategoriesManager" extends="layout">
+         <put-attribute name="body" value="/views/index/SubjectCategoriesManager.jsp" /> 
+         <put-attribute name="style" value="/assets/css/SubjectCategoriesManager.css" /> 
+        <put-attribute name="title" value="Subject Categories Manager" />   
+        <put-attribute name="script" value="/assets/js/SubjectCategoriesManager.js" />   
+    </definition>
+    <definition name="SlotRoomManager" extends="layout">
+        <put-attribute name="body" value="/views/index/SlotRoomManager.jsp" /> 
+        <put-attribute name="style" value="/assets/css/SlotRoomManager.css" /> 
+        <put-attribute name="title" value="Slot Room Manager" />   
+        <put-attribute name="script" value="/assets/js/SlotRoomManager.js" />   
+    </definition>
+    <definition name="AssignmentSubject" extends="layout">
+        <put-attribute name="body" value="/views/index/AssignmentSubject.jsp" /> 
+        <put-attribute name="style" value="/assets/css/AssignmentSubject.css" /> 
+        <put-attribute name="title" value="Assignment Subject" />   
+        <put-attribute name="script" value="/assets/js/AssignmentSubject.js" />   
+    </definition>
+</tiles-definitions>

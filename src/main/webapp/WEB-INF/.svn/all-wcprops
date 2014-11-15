@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF/web.xml
+END
+messages.properties
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF/messages.properties
+END
+spring-security.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/src/main/webapp/WEB-INF/spring-security.xml
+END

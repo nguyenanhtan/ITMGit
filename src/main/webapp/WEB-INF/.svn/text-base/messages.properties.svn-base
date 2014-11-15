@@ -1,0 +1,22 @@
+#Validation message for username field
+NotEmpty.userForm.username=User name must not be blank.
+Size.userForm.username=User name must between 6 to 15 characters.
+
+#Validation message for email field
+Email.userForm.email=Your e-mail is incorrect.
+
+#Validation message for old password field
+NotEmpty.userForm.password=Your password must not be blank.
+
+#Validation message for new password field
+NotEmpty.userForm.newpassword=Your new password must not be blank.
+Size.userForm.newpassword=Your new password must between 6 to 15 characters.
+
+#Validation message for confirm password
+constraintdescriptor.fieldmatch=Password and Confirm password must be matched.
+
+#Custom validation annotation
+Phone=Invalid format, valid formats are 1234567890, 123-456-7890 x1234
+
+#Validation message for capacity
+typeMismatch.capacity=Input should be a number

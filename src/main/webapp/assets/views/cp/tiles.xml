@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="layout.base" template="/view/cp/layout/base.jsp">
+        <put-attribute name="title" value="Popnet.vn - Hiệu quả bùng nổ"/>
+        <put-attribute name="header" value="/view/cp/widget/header.jsp"/>
+        <put-attribute name="footer" value="/view/cp/widget/footer.jsp"/>
+    </definition>
+    
+    <definition name="layout.main" extends="layout.base">
+        <put-attribute name="content" value="/view/cp/layout/main.jsp"/>
+        <put-attribute name="menu" value="/view/cp/widget/menu.jsp" cascade="true"/>
+    </definition>  
+      
+    <definition name="dashboard" extends="layout.main">  
+        <put-attribute name="main" value="/view/dashboard.jsp" cascade="true"/>
+    </definition>
+    
+    
+    <definition name="bank.signin" template="/views/cp/signin.jsp">
+        <put-attribute name="title" value="Login" />        
+    </definition>
+</tiles-definitions>

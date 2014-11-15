@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/src/main/java/vn/webapp/dao
+END
+BaseDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/src/main/java/vn/webapp/dao/BaseDao.java
+END
+UserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/src/main/java/vn/webapp/dao/UserDAO.java
+END
+UserDAOImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2/trunk/src/main/java/vn/webapp/dao/UserDAOImpl.java
+END

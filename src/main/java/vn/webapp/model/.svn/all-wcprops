@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/trunk/src/main/java/vn/webapp/model
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/src/main/java/vn/webapp/model/User.java
+END
+Users.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/src/main/java/vn/webapp/model/Users.java
+END
+Role.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3/trunk/src/main/java/vn/webapp/model/Role.java
+END

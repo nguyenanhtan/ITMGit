@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="layout.base" template="/views/cp/layout/base.jsp">           
+        <put-attribute name="header" value="/views/cp/widget/header.jsp" />
+        <put-attribute name="mainmenu" value="/views/cp/widget/mainmenu.jsp" />                                       
+        <put-attribute name="footer" value="/views/cp/widget/footer.jsp" />        
+    </definition> 
+    
+    <!-- Users module -->   
+    <definition name="cp.index" extends="layout.base">
+        <put-attribute name="title" value="User - All users" />                                 
+        <put-attribute name="content" value="/views/cp/user/list.jsp" />
+    </definition>
+    <definition name="cp.userdetail" extends="layout.base">
+        <put-attribute name="title" value="User - Detail" />                                 
+        <put-attribute name="content" value="/views/cp/user/detail.jsp" />
+    </definition>
+    <definition name="cp.addnewuser" extends="layout.base">
+        <put-attribute name="title" value="Add a new user" />                                 
+        <put-attribute name="content" value="/views/cp/user/addnewuser.jsp" />
+    </definition>
+         
+    <definition name="signin" template="/views/cp/signin.jsp">
+        <put-attribute name="title" value="Login" />        
+    </definition>
+</tiles-definitions>

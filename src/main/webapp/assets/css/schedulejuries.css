@@ -1,0 +1,36 @@
+.selectandfilter{
+	float:left;
+	margin-right: 20px;
+}
+#detail-juries{
+	margin-top: 10px;
+}
+.juries-heading{
+	cursor: pointer;
+}
+.subject-project{
+
+}
+#row-juries{
+
+}
+#btn-view-detail{
+
+}
+#btn-view-less{
+	
+}
+#backToTopBtn{
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+}
+.function{
+	margin-bottom: 10px;
+}
+#list-jury .form-control{
+	/*width: auto;*/
+}
+#list-jury  td{
+	width: 25%;
+}

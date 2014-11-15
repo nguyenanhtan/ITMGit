@@ -1,0 +1,13 @@
+
+#head-row .float-left{
+	margin-right: 20px;
+}
+.list-depart-item/*, .list-class-item*/, .remove-class{
+	cursor: pointer;
+}
+.list-depart-item .pull-right, #list-class .pull-right{
+	margin-right: 10px;
+}
+.list-depart-item:hover{
+	background-color: #d9edf7;
+}
