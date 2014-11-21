@@ -34,10 +34,20 @@
 					<input class="form-control sub-name" placeholder="Subject" value='<c:out value="${student.title}"/>'>
 					<input type="hidden" class="id-st" value='<c:out value="${student.id}"/>'>
 				</td>
-				<td>										
+				<td>									
+					<c:forEach items="${student.studentDefense}" var="sd"> 
+						<c:set var="pid" value="${sd.supervisor.id}"/>
+					</c:forEach>	
 					<select class="form-control spv-name">
 					  	<c:forEach items="${listProfessors}" var="ps"> 
-						  <option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+					  	<c:choose>
+					  		<c:when test="${ps.id == pid}">
+						       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+						    </c:when>
+						    <c:otherwise>
+						    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+							</c:otherwise>
+						</c:choose>
 						</c:forEach> 
 					</select>  
 				</td>

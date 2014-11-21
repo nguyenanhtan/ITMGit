@@ -251,10 +251,12 @@
 	</div><!-- End detail-juries -->
 
 </div>
-
+<c:forEach items="${listStudentDefense}" var="ldf"> 
+	<p><c:out value="${ldf.superviseStudent.name}"/> - <c:out value="${ldf.president}"/></p>
+</c:forEach>
 <div id="box-list-jury">
 				<table id="list-jury" class="table table-hover">
-				
+				<c:forEach items="${listStudentDefense}" var="ldf"> 
 				<tr>
 					<!-- <td>
 					    <input type="checkbox"> 
@@ -264,10 +266,10 @@
 
 						  <!-- List group -->
 						  <ul class="list-group">
-						    <li class="list-group-item"><label>Sinh vien:</label> Nguyen Anh Tan</li>
-						    <li class="list-group-item">SHSV: 20092343</li>
-						    <li class="list-group-item">De tai: Nghiên cứu triển khai chữ ký số điện tử</li>
-						    
+						    <li class="list-group-item"><label>Sinh viên:</label> <c:out value="${ldf.superviseStudent.name}"/></li>
+						    <li class="list-group-item"><label>SHSV:</label> <c:out value="${ldf.superviseStudent.studentID}"/></li>
+						    <li class="list-group-item"><label>Đề tài:</label> <c:out value="${ldf.superviseStudent.title}"/></li>
+						    <li class="list-group-item"><label>GVHD:</label> <c:out value="${ldf.supervisor.name}"/></li>
 						    
 						  </ul>
 						</div>
@@ -280,11 +282,20 @@
 						
 						<div class="form-group">
 						    <div class="input-group">
-						        <div class="input-group-addon">Chu tich</div>
-						        <select class="form-control ">
-							        <c:forEach items="${listProfessors}" var="ps"> 
-										<option value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
-										
+						        <div class="input-group-addon">Chủ tịch</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.president == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.president.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
 									</c:forEach>	
 								</select>
 						    </div>
@@ -293,11 +304,20 @@
 					
 						<div class="form-group">
 						    <div class="input-group">
-						        <div class="input-group-addon">Phan bien 1</div>
-						        <select class="form-control ">
-							        <c:forEach items="${listProfessors}" var="ps"> 
-										<option value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
-										
+						        <div class="input-group-addon">Phản biện 1</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.examiner1 == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.examiner1.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
 									</c:forEach>	
 								</select>
 						    </div>
@@ -305,86 +325,125 @@
 
 						<div class="form-group">
 						    <div class="input-group">
-						        <div class="input-group-addon">Phan bien 2</div>
-						        <select class="form-control ">
-							        <c:forEach items="${listProfessors}" var="ps"> 
-										<option value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
-										
+						        <div class="input-group-addon">Phản biện 2</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.examiner2 == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.examiner2.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						    </div>
+						</div>
+						<div class="form-group">
+						    <div class="input-group">
+						        <div class="input-group-addon">Thư kí</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.secretary == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.secretary.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
 									</c:forEach>	
 								</select>
 						    </div>
 						</div>
 						</td>
 						<td>
-						<div class="form-group">
-						    <div class="input-group">
-						        <div class="input-group-addon">Thu ki</div>
-						        <select class="form-control ">
-							        <c:forEach items="${listProfessors}" var="ps"> 
-										<option value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
-										
-									</c:forEach>	
-								</select>
-						    </div>
-						</div>
+						
 
 						<div class="form-group">
 						    <div class="input-group">
-						        <div class="input-group-addon">Uy vien</div>
-						        <select class="form-control ">
-							        <c:forEach items="${listProfessors}" var="ps"> 
-										<option value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
-										
+						        <div class="input-group-addon">Ủy viên</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.additionalMember == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.additionalMember.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
 									</c:forEach>	
 								</select>
 						    </div>
 						</div>
 						
-						<div class="form-group">
-						    <div class="input-group">
-						        <div class="input-group-addon">GVHD</div>
-						        <select class="form-control ">
-							        <c:forEach items="${listProfessors}" var="ps"> 
-										<option value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
-										
-									</c:forEach>	
-								</select>
-						    </div>
-						</div>
-					</td>
+						
 					
-					<td>
 						<div class="form-group">
 						    <div class="input-group">
-						        <div class="input-group-addon">Kip</div>
-						        <select class="form-control ">
-									<option value="1">1</option>
-									<option value="1">2</option>
-									<option value="1">4</option>
-									<option value="1">5</option>
-									<option value="1">6</option>
-									
+						        <div class="input-group-addon">Kíp</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.slot == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listSlot}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.slot.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/> --- Từ <c:out value="${ps.start}"/> đến <c:out value="${ps.end}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/> --- Từ <c:out value="${ps.start}"/> đến <c:out value="${ps.end}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
 								</select>
 						    </div>
 						</div>
 
 						<div class="form-group">
 						    <div class="input-group">
-						        <div class="input-group-addon">Phong</div>
-						        <select class="form-control ">
-									<option value="1">D3-101</option>
-									<option value="1">D3-101</option>
-									<option value="1">D3-101</option>
-									<option value="1">D3-101</option>
-									<option value="1">D3-101</option>
-									
+						        <div class="input-group-addon">Phòng</div>
+						        <select class="form-control ">		
+						        	<c:if test="${ldf.room == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listRoom}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.room.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
 								</select>
 						    </div>
 						</div>
+
+						<div class="checkbox" style="float:left">
+						    <label>
+						      <input type="checkbox"> 
+						    </label>
+						</div>
+						<button type="button" class="btn btn-success">Save</button>
+						<button type="button" class="btn btn-warning">Remove</button>
 					</td>
 					
 					
 				</tr>
+				</c:forEach>
 				</table>
 			</div>
 </div><!-- End containner -->

@@ -53,9 +53,15 @@ public class ProfessorServiceImpl implements ProfessorService{
 	}
 	@Override
 	@Transactional
-	public List<ProfessorsInfo> listProfessors() {
+	public List<Professor> listProfessors() {
 		// TODO Auto-generated method stub
 		return professorDAO.listProfessors();
+	}
+	@Override
+	@Transactional
+	public List<ProfessorsInfo> listProfessorsDetail() {
+		// TODO Auto-generated method stub
+		return professorDAO.listProfessorsDetail();
 	}
 	@Override
 	@Transactional

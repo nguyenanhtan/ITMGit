@@ -68,11 +68,19 @@ public class ProfessorDAOImpl implements  ProfessorDAO{
 	}
 
 	@Override
-	public List<ProfessorsInfo> listProfessors() {
+	public List<ProfessorsInfo> listProfessorsDetail() {
 		// TODO Auto-generated method stub
 		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM professors_info");
 		q.addEntity(ProfessorsInfo.class);
 //		sessionFactory.getCurrentSession().getTransaction().commit();
+		return q.list();
+	}
+	@Override
+	public List<Professor> listProfessors() {
+		// TODO Auto-generated method stub
+		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM professors");
+		q.addEntity(Professor.class);
+//				sessionFactory.getCurrentSession().getTransaction().commit();
 		return q.list();
 	}
 	@Override

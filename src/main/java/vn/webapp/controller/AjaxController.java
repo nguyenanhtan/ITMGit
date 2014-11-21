@@ -27,6 +27,7 @@ import vn.webapp.model.Room;
 import vn.webapp.model.Slot;
 import vn.webapp.model.SubjectCategory;
 import vn.webapp.model.SuperviseStudent;
+import vn.webapp.model.SuperviseStudentDetail;
 import vn.webapp.service.ClassesService;
 import vn.webapp.service.DefensessionService;
 import vn.webapp.service.DepartmentsService;
@@ -356,13 +357,13 @@ public class AjaxController {
 	}
 	@RequestMapping(value = "/updateSubject", method = RequestMethod.GET)
     public @ResponseBody
-    SuperviseStudent updateSubject(@RequestParam(value = "id") String id, @RequestParam(value = "sub") String sub, @RequestParam(value = "spv") String spv) {
+    SuperviseStudentDetail updateSubject(@RequestParam(value = "id") String id, @RequestParam(value = "sub") String sub, @RequestParam(value = "spv") String spv) {
 		if(sub.length() > 0)
 		{
-			SuperviseStudent lStudent = new SuperviseStudent();
+			SuperviseStudentDetail lStudent = new SuperviseStudentDetail();
 			lStudent.setId(id);
 			lStudent.setTitle(sub);
-			
+			lStudent.setSupervisor(spv);
 			supStudentSvc.updateSuperviseStudent(lStudent);
 			return lStudent;
 		}else{

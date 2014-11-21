@@ -16,6 +16,7 @@ public interface ProfessorDAO {
 	void updateProfessor(Professor professor);
 	  
 	void deleteProfessor(Professor professor);
-	List<ProfessorsInfo> listProfessors();	
+	List<ProfessorsInfo> listProfessorsDetail();
+	List<Professor> listProfessors();	
 	List<Degree> listDegrees();
 }

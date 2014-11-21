@@ -18,6 +18,9 @@ import vn.webapp.dto.DataPage;
 import vn.webapp.model.Defensesession;
 import vn.webapp.model.Department;
 import vn.webapp.model.Institutes;
+import vn.webapp.model.Professor;
+import vn.webapp.model.StudentDefense;
+import vn.webapp.model.SuperviseStudent;
 import vn.webapp.model.Users;
 import vn.webapp.service.DepartmentsService;
 import vn.webapp.service.InstitutesSevice;
@@ -111,7 +114,15 @@ public class HomeController {
 		List<Defensesession> listDefense = this.dfsvc.listDefensesessions();
 		model.addAttribute("listDefense", listDefense);
 		model.addAttribute("listProfessors", proSvc.listProfessors());
-		model.addAttribute("paramOne", "hehehehehe");
+		model.addAttribute("listStudentDefense", supStudentSvc.listStudentDefense());
+		model.addAttribute("listSlot", srms.listSlots());
+		model.addAttribute("listRoom", srms.listRooms());
+		
+		for(Professor x: proSvc.listProfessors()){
+			for(StudentDefense y:x.getSupervisorStudent()){
+				System.out.println(x.getName()+"-->"+y.getSuperviseStudent().getName());
+			}
+		}
 		return "schedulejuries";
 	}
 	@RequestMapping(value = "/DefenseSessionsManager", method = RequestMethod.GET)

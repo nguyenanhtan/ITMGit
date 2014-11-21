@@ -1,9 +1,16 @@
 package vn.webapp.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -46,6 +53,17 @@ public class SuperviseStudent {
 
 	@Column(name = "Title", nullable = true)
 	private String title ;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="superviseStudent", cascade = CascadeType.ALL)
+    private Set<StudentDefense> studentDefense;
+
+	public Set<StudentDefense> getStudentDefense() {
+		return studentDefense;
+	}
+
+	public void setStudentDefense(Set<StudentDefense> studentDefense) {
+		this.studentDefense = studentDefense;
+	}
 
 	public String getStudentID() {
 		return studentID;

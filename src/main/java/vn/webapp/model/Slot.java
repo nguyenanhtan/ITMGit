@@ -1,9 +1,14 @@
 package vn.webapp.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +30,18 @@ public class Slot {
 	
 	@Column(name = "End", nullable = false)
 	private String end ;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="slot", cascade = CascadeType.ALL)
+    private Set<StudentDefense> slotStudent;
+	
+	
+	public Set<StudentDefense> getSlotStudent() {
+		return slotStudent;
+	}
+
+	public void setSlotStudent(Set<StudentDefense> slotStudent) {
+		this.slotStudent = slotStudent;
+	}
 
 	public String getId() {
 		return id;

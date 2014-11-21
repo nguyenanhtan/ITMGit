@@ -1,9 +1,14 @@
 package vn.webapp.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,38 +19,50 @@ public class StudentDefense {
 	@Column(name = "ID", nullable = false)
 	private String id;
 	
-	@Column(name = "StudentID", nullable = false)
-	private String studentID ;
+	@ManyToOne
+    @JoinColumn(name = "StudentID", nullable = false)
+	private SuperviseStudent superviseStudent ;
 
 	@Column(name = "Title", nullable = true)
 	private String title ;
 
-	@Column(name = "Supervisor", nullable = true)
-	private String supervisor ;
+	@ManyToOne
+    @JoinColumn(name = "Supervisor", nullable = true)
+	private Professor supervisor ;
 
-	@Column(name = "Examiner1", nullable = true)
-	private String examiner1 ;
+	@ManyToOne
+    @JoinColumn(name = "Examiner1", nullable = true)
+	private Professor examiner1 ;
 
-	@Column(name = "Examiner2", nullable = true)
-	private String examiner2 ;
+	@ManyToOne
+    @JoinColumn(name = "Examiner2", nullable = true)
+	private Professor examiner2 ;
 
-	@Column(name = "President", nullable = true)
-	private String president ;
+	@ManyToOne
+    @JoinColumn(name = "President", nullable = true)
+	private Professor president ;
 
-	@Column(name = "Secretary", nullable = true)
-	private String secretary ;
+	@ManyToOne
+    @JoinColumn(name = "Secretary", nullable = true)
+	private Professor secretary ;
 
-	@Column(name = "AdditionalMember", nullable = true)
-	private String additionalMember ;
+	@ManyToOne
+    @JoinColumn(name = "AdditionalMember", nullable = true)
+	private Professor additionalMember ;
 
-	@Column(name = "Slot", nullable = true)
-	private String slot ;
+	@ManyToOne
+    @JoinColumn(name = "Slot", nullable = true)
+	private Slot slot ;
 
-	@Column(name = "Room", nullable = true)
-	private String room ;
+	@ManyToOne
+    @JoinColumn(name = "Room", nullable = true)
+	private Room room ;
 
-	@Column(name = "SessionID", nullable = true)
-	private String sessionID ;
+	@ManyToOne
+    @JoinColumn(name = "SessionID", nullable = true)
+	private Defensesession sessionID ;
+
+	
 
 	public String getId() {
 		return id;
@@ -55,12 +72,13 @@ public class StudentDefense {
 		this.id = id;
 	}
 
-	public String getStudentID() {
-		return studentID;
+	
+	public SuperviseStudent getSuperviseStudent() {
+		return superviseStudent;
 	}
 
-	public void setStudentID(String studentID) {
-		this.studentID = studentID;
+	public void setSuperviseStudent(SuperviseStudent superviseStudent) {
+		this.superviseStudent = superviseStudent;
 	}
 
 	public String getTitle() {
@@ -71,77 +89,81 @@ public class StudentDefense {
 		this.title = title;
 	}
 
-	public String getSupervisor() {
+	
+
+	public Professor getSupervisor() {
 		return supervisor;
 	}
 
-	public void setSupervisor(String supervisor) {
+	public void setSupervisor(Professor supervisor) {
 		this.supervisor = supervisor;
 	}
 
-	public String getExaminer1() {
+
+	public Professor getExaminer1() {
 		return examiner1;
 	}
 
-	public void setExaminer1(String examiner1) {
+	public void setExaminer1(Professor examiner1) {
 		this.examiner1 = examiner1;
 	}
 
-	public String getExaminer2() {
+	public Professor getExaminer2() {
 		return examiner2;
 	}
 
-	public void setExaminer2(String examiner2) {
+	public void setExaminer2(Professor examiner2) {
 		this.examiner2 = examiner2;
 	}
 
-	public String getPresident() {
+	public Professor getPresident() {
 		return president;
 	}
 
-	public void setPresident(String president) {
+	public void setPresident(Professor president) {
 		this.president = president;
 	}
 
-	public String getSecretary() {
+	public Professor getSecretary() {
 		return secretary;
 	}
 
-	public void setSecretary(String secretary) {
+	public void setSecretary(Professor secretary) {
 		this.secretary = secretary;
 	}
 
-	public String getAdditionalMember() {
+	public Professor getAdditionalMember() {
 		return additionalMember;
 	}
 
-	public void setAdditionalMember(String additionalMember) {
+	public void setAdditionalMember(Professor additionalMember) {
 		this.additionalMember = additionalMember;
 	}
 
-	public String getSlot() {
+	public Slot getSlot() {
 		return slot;
 	}
 
-	public void setSlot(String slot) {
+	public void setSlot(Slot slot) {
 		this.slot = slot;
 	}
 
-	public String getRoom() {
+	public Room getRoom() {
 		return room;
 	}
 
-	public void setRoom(String room) {
+	public void setRoom(Room room) {
 		this.room = room;
 	}
 
-	public String getSessionID() {
+	public Defensesession getSessionID() {
 		return sessionID;
 	}
 
-	public void setSessionID(String sessionID) {
+	public void setSessionID(Defensesession sessionID) {
 		this.sessionID = sessionID;
 	}
 
+	
 	
 }

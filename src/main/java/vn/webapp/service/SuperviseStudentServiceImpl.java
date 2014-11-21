@@ -10,7 +10,9 @@ import vn.webapp.dao.SuperviseStudentDAO;
 import vn.webapp.model.Classes;
 import vn.webapp.model.Promotion;
 import vn.webapp.model.Status;
+import vn.webapp.model.StudentDefense;
 import vn.webapp.model.SuperviseStudent;
+import vn.webapp.model.SuperviseStudentDetail;
 import vn.webapp.model.Type;
 
 @Service("SuperviseStudentService")
@@ -39,7 +41,7 @@ public class SuperviseStudentServiceImpl implements SuperviseStudentService {
 
 	@Override
 	@Transactional
-	public void updateSuperviseStudent(SuperviseStudent superviseStudent) {
+	public void updateSuperviseStudent(SuperviseStudentDetail superviseStudent) {
 		// TODO Auto-generated method stub
 		supStudentDAO.updateSuperviseStudent(superviseStudent);
 	}
@@ -91,6 +93,13 @@ public class SuperviseStudentServiceImpl implements SuperviseStudentService {
 	public List<SuperviseStudent> listSuperviseStudent(String name) {
 		// TODO Auto-generated method stub
 		return supStudentDAO.listSuperviseStudent(name);
+	}
+
+	@Override
+	@Transactional
+	public List<StudentDefense> listStudentDefense() {
+		// TODO Auto-generated method stub
+		return supStudentDAO.listStudentDefense();
 	}
 	
 }

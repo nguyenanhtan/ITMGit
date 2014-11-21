@@ -1,2 +1,34 @@
 Hướng dẫn hiển thị tiếng việt trong Spring
 http://sangnd.wordpress.com/2013/11/17/nhap-tieng-viet-trong-spring-framework/
+
+CREATE VIEW student_defense_detail AS
+SELECT  `supervise_students`.`StudentName`, 
+ `supervise_students`.`Promotion`, 
+ `supervise_students`.`Class`, 
+ `supervise_students`.`Email`, 
+ `supervise_students`.`Phone`, 
+ `supervise_students`.`StartDate`, 
+ `supervise_students`.`EndDate`, 
+ `supervise_students`.`Type`,  
+ `supervise_students`.`Status`, 
+ `supervise_students`.`StudentID`, 
+ `supervise_students`.`Title` , 
+ `supervise_students`.`ID` AS ID, 
+`student_defense`.`Title`, 
+`student_defense`.`Supervisor`,
+`student_defense`.`Examiner1`, 
+`student_defense`.`Examiner2`, 
+`student_defense`.`President`, 
+`student_defense`.`Secretary`, 
+`student_defense`.`AdditionalMember`, 
+`student_defense`.`Slot`, 
+`student_defense`.`Room`, 
+`student_defense`.`SessionID`
+FROM student_defense, supervise_students
+WHERE supervise_students.ID = student_defense.StudentID
+
+
+SELECT * 
+FROM student_defense_detail
+INNER JOIN professors ON professors.ID =  `student_defense_detail`.`Supervisor` 
+LIMIT 0 , 30

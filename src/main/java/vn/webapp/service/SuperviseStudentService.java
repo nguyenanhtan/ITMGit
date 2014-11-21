@@ -5,7 +5,9 @@ import java.util.List;
 import vn.webapp.model.Classes;
 import vn.webapp.model.Promotion;
 import vn.webapp.model.Status;
+import vn.webapp.model.StudentDefense;
 import vn.webapp.model.SuperviseStudent;
+import vn.webapp.model.SuperviseStudentDetail;
 import vn.webapp.model.Type;
 
 public interface SuperviseStudentService {
@@ -13,7 +15,7 @@ public interface SuperviseStudentService {
 	  
 	SuperviseStudent findSuperviseStudentById(String id);
 	  
-	void updateSuperviseStudent(SuperviseStudent superviseStudent);
+	void updateSuperviseStudent(SuperviseStudentDetail superviseStudent);
 	  
 	void deleteSuperviseStudent(SuperviseStudent superviseStudent);
 	List<SuperviseStudent> listSuperviseStudent();	
@@ -22,4 +24,5 @@ public interface SuperviseStudentService {
 	List<Promotion> listPromotion();
 	List<Type> listType();
 	List<Status> listStatus();
+	List<StudentDefense> listStudentDefense();
 }

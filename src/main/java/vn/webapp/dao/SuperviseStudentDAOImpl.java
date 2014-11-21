@@ -2,16 +2,19 @@ package vn.webapp.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import vn.webapp.model.Classes;
+import vn.webapp.model.Professor;
 import vn.webapp.model.Promotion;
 import vn.webapp.model.Status;
 import vn.webapp.model.StudentDefense;
 import vn.webapp.model.SuperviseStudent;
+import vn.webapp.model.SuperviseStudentDetail;
 import vn.webapp.model.Type;
 
 @Repository("SuperviseStudentDAO")
@@ -30,7 +33,7 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().persist(superviseStudent);
 		StudentDefense sdf = new StudentDefense();
-		sdf.setStudentID(superviseStudent.getId());
+		sdf.setSuperviseStudent(superviseStudent);
 		sessionFactory.getCurrentSession().persist(sdf);
 	}
 
@@ -41,11 +44,22 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 	}
 
 	@Override
-	public void updateSuperviseStudent(SuperviseStudent superviseStudent) {
+	public void updateSuperviseStudent(SuperviseStudentDetail superviseStudent) {
 		// TODO Auto-generated method stub
 		SuperviseStudent upStudent = (SuperviseStudent)sessionFactory.getCurrentSession().get(SuperviseStudent.class, superviseStudent.getId());
-		upStudent.setTitle(superviseStudent.getTitle());
+		upStudent.setTitle(superviseStudent.getTitle());		
 		sessionFactory.getCurrentSession().update(upStudent);
+		Professor ps = (Professor)sessionFactory.getCurrentSession().get(Professor.class, superviseStudent.getSupervisor());
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM StudentDefense WHERE studentID = :studentID");
+		query.setParameter("studentID", superviseStudent.getId());
+		List<StudentDefense> results = (List<StudentDefense>)query.list();
+		StudentDefense sd = null;
+		if(results != null){
+			sd = results.get(0);
+		}
+		sd.setSupervisor(ps);
+		sessionFactory.getCurrentSession().update(ps);
+				
 	}
 
 	@Override
@@ -59,6 +73,15 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 		// TODO Auto-generated method stub
 		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM supervise_students");
 		q.addEntity(SuperviseStudent.class);
+//		sessionFactory.getCurrentSession().getTransaction().commit();
+		return q.list();
+	}
+
+	@Override
+	public List<StudentDefense> listStudentDefense() {
+		// TODO Auto-generated method stub
+		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM student_defense");
+		q.addEntity(StudentDefense.class);
 //		sessionFactory.getCurrentSession().getTransaction().commit();
 		return q.list();
 	}

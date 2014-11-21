@@ -1,9 +1,14 @@
 package vn.webapp.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +27,17 @@ public class Room {
 	
 	@Column(name = "Capacity", nullable = false)
 	private String capacity ;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="room", cascade = CascadeType.ALL)
+    private Set<StudentDefense> roomStudent;
+	
+	public Set<StudentDefense> getRoomStudent() {
+		return roomStudent;
+	}
+
+	public void setRoomStudent(Set<StudentDefense> roomStudent) {
+		this.roomStudent = roomStudent;
+	}
 
 	public String getCapacity() {
 		return capacity;
