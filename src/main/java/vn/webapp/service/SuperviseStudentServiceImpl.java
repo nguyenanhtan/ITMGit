@@ -18,6 +18,13 @@ import vn.webapp.model.Type;
 @Service("SuperviseStudentService")
 public class SuperviseStudentServiceImpl implements SuperviseStudentService {
 
+	@Override
+	@Transactional
+	public List<StudentDefense> listStudentDefense(String id) {
+		// TODO Auto-generated method stub
+		return supStudentDAO.listStudentDefense(id);
+	}
+
 	private SuperviseStudentDAO supStudentDAO;
 
 	@Autowired
@@ -41,9 +48,9 @@ public class SuperviseStudentServiceImpl implements SuperviseStudentService {
 
 	@Override
 	@Transactional
-	public void updateSuperviseStudent(SuperviseStudentDetail superviseStudent) {
+	public void updateStudentDefense(StudentDefense superviseStudent) {
 		// TODO Auto-generated method stub
-		supStudentDAO.updateSuperviseStudent(superviseStudent);
+		supStudentDAO.updateStudentDefense(superviseStudent);
 	}
 
 	@Override
@@ -100,6 +107,13 @@ public class SuperviseStudentServiceImpl implements SuperviseStudentService {
 	public List<StudentDefense> listStudentDefense() {
 		// TODO Auto-generated method stub
 		return supStudentDAO.listStudentDefense();
+	}
+
+	@Override
+	@Transactional
+	public StudentDefense findStudentDefenseById(String id) {
+		// TODO Auto-generated method stub
+		return supStudentDAO.findStudentDefenseById(id);
 	}
 	
 }

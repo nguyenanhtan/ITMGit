@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import vn.webapp.dto.DataPage;
@@ -109,20 +110,25 @@ public class HomeController {
 		return "index";
 	}
 	@RequestMapping(value = "/schedulejuries", method = RequestMethod.GET)
-	public String schedulejuries(Locale locale, Model model) {
+	public String schedulejuries(@RequestParam(value="def", required=false) String defId, Model model) {
 		
 		List<Defensesession> listDefense = this.dfsvc.listDefensesessions();
 		model.addAttribute("listDefense", listDefense);
 		model.addAttribute("listProfessors", proSvc.listProfessors());
-		model.addAttribute("listStudentDefense", supStudentSvc.listStudentDefense());
+		if(defId == null){
+			model.addAttribute("listStudentDefense", supStudentSvc.listStudentDefense(listDefense.get(0).getId()));
+			model.addAttribute("sessionActive", listDefense.get(0).getId());
+		}else if(defId.equals("ALL")){
+			model.addAttribute("listStudentDefense", supStudentSvc.listStudentDefense());
+			model.addAttribute("sessionActive", "ALL");
+		}else{
+			model.addAttribute("listStudentDefense", supStudentSvc.listStudentDefense(defId));
+			model.addAttribute("sessionActive", defId);		
+		}
 		model.addAttribute("listSlot", srms.listSlots());
 		model.addAttribute("listRoom", srms.listRooms());
 		
-		for(Professor x: proSvc.listProfessors()){
-			for(StudentDefense y:x.getSupervisorStudent()){
-				System.out.println(x.getName()+"-->"+y.getSuperviseStudent().getName());
-			}
-		}
+		
 		return "schedulejuries";
 	}
 	@RequestMapping(value = "/DefenseSessionsManager", method = RequestMethod.GET)
@@ -180,8 +186,8 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/AssignmentSubject", method = RequestMethod.GET)
 	public String AssignmentSubject(Locale locale, Model model) {
-		
-		model.addAttribute("listStudents", supStudentSvc.listSuperviseStudent());
+		model.addAttribute("listDefense", this.dfsvc.listDefensesessions());
+		model.addAttribute("listStudentDefense", supStudentSvc.listStudentDefense());
 		model.addAttribute("listProfessors", proSvc.listProfessors());
 		return "AssignmentSubject";
 	}

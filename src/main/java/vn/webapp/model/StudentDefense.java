@@ -1,14 +1,11 @@
 package vn.webapp.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -60,7 +57,7 @@ public class StudentDefense {
 
 	@ManyToOne
     @JoinColumn(name = "SessionID", nullable = true)
-	private Defensesession sessionID ;
+	private Defensesession session ;
 
 	
 
@@ -156,12 +153,12 @@ public class StudentDefense {
 		this.room = room;
 	}
 
-	public Defensesession getSessionID() {
-		return sessionID;
+	public Defensesession getSession() {
+		return session;
 	}
 
-	public void setSessionID(Defensesession sessionID) {
-		this.sessionID = sessionID;
+	public void setSession(Defensesession session) {
+		this.session = session;
 	}
 
 	

@@ -12,8 +12,8 @@
 			  <span class="input-group-addon">Ten Sinh vien</span>
 			  <input list="st-list" id="st-name" class="form-control" placeholder="Name">
 			  <datalist id="st-list">
-			  	<c:forEach items="${listStudents}" var="student"> 
-				  <option class="opt" value='<c:out value="${student.name}"/>'><c:out value="${student.studentID}"/></option>
+			  	<c:forEach items="${listStudentDefense}" var="sdefense"> 
+				  <option class="opt" value='<c:out value="${sdefense.superviseStudent.name}"/>'><c:out value="${sdefense.superviseStudent.studentID}"/></option>
 				</c:forEach> 
 			  </datalist>
 			</div>
@@ -24,24 +24,24 @@
 				<th>SHSV</th>
 				<th>Ten sinh vien</th>
 				<th>Ten de tai</th>	
-				<th>Giang vien huong dan</th>			
+				<th>Giang vien huong dan</th>
+				<th>Hội đồng</th>			
 			</tr>
-			<c:forEach items="${listStudents}" var="student"> 
+			<c:forEach items="${listStudentDefense}" var="sdefense"> 
 			<tr class="row-st">
-				<td><c:out value="${student.studentID}"/></td>
-				<td><c:out value="${student.name}"/></td>
+				<td><c:out value="${sdefense.superviseStudent.studentID}"/></td>
+				<td><c:out value="${sdefense.superviseStudent.name}"/></td>
 				<td>
-					<input class="form-control sub-name" placeholder="Subject" value='<c:out value="${student.title}"/>'>
-					<input type="hidden" class="id-st" value='<c:out value="${student.id}"/>'>
+					<input class="form-control sub-name" placeholder="Subject" value='<c:out value="${sdefense.superviseStudent.title}"/>'>
+					<input type="hidden" class="id-def" value='<c:out value="${sdefense.id}"/>'>
+					<input type="hidden" value="0" class="flag-change">
 				</td>
 				<td>									
-					<c:forEach items="${student.studentDefense}" var="sd"> 
-						<c:set var="pid" value="${sd.supervisor.id}"/>
-					</c:forEach>	
+						
 					<select class="form-control spv-name">
 					  	<c:forEach items="${listProfessors}" var="ps"> 
 					  	<c:choose>
-					  		<c:when test="${ps.id == pid}">
+					  		<c:when test="${ps.id == sdefense.supervisor.id}">
 						       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
 						    </c:when>
 						    <c:otherwise>
@@ -51,7 +51,31 @@
 						</c:forEach> 
 					</select>  
 				</td>
-				
+				<td>
+					
+					<select class="form-control session-defense">
+						<c:if test="${sdefense.session == null}">
+			        		<option value='' selected>-------</option>
+			        	</c:if>	
+					  <c:forEach items="${listDefense}" var="defense">   
+				        	<c:if test="${defense.active > 0}"> 					   
+							  	
+							  	<c:choose>
+							  		<c:when test="${defense.id == sdefense.session.id}">
+								       <option selected value='<c:out value="${defense.id}"/>' >
+									  		<c:out value="${defense.date}"/>
+									  	</option>
+								    </c:when>
+								    <c:otherwise>
+								    	<option value='<c:out value="${defense.id}"/>' >
+									  		<c:out value="${defense.date}"/>
+									  	</option>
+									</c:otherwise>
+								</c:choose>
+						   </c:if>				   						   
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>

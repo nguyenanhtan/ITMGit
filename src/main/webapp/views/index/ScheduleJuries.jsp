@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-
+<link href='<c:url value="/assets/css/jquery.mCustomScrollbar.min.css" />' rel="stylesheet" type="text/css" media="all"/>
   <div class="container">
   	<div class="row">
-  		
+  		<div class="col-md-12" id="alert-mes">
+
+		</div>
 		<div class="col-md-12 form-inline function">
 		<button class="btn btn-primary" data-toggle="modal" data-target="#myStudent">
 		  <span class="glyphicon glyphicon-plus"> </span> Them sinh vien
@@ -93,12 +95,35 @@
   			<div class="form-group">
 			    <div class="input-group">
 			      <div class="input-group-addon">Chon hoi dong</div>
-			        <select class="form-control">
+			        <select class="form-control" id="select-defense">
+			        	<c:set var="all"  value="ALL"/>
+			        	<c:choose>
+					  		<c:when test="${all == sessionActive}">
+						       <option selected value='ALL' >
+							  		-- All --
+							  	</option>
+						    </c:when>
+						    <c:otherwise>
+						    	<option value='ALL' >
+							  		-- All --
+							  	</option>
+							</c:otherwise>
+						</c:choose>
 					  <c:forEach items="${listDefense}" var="defense">   
 				        	<c:if test="${defense.active > 0}"> 					   
-							  	<option value='<c:out value="${defense.id}"/>' >
-							  		<c:out value="${defense.date}"/>
-							  	</option>
+							  	
+							  	<c:choose>
+							  		<c:when test="${defense.id == sessionActive}">
+								       <option selected value='<c:out value="${defense.id}"/>' >
+									  		<c:out value="${defense.date}"/>
+									  	</option>
+								    </c:when>
+								    <c:otherwise>
+								    	<option value='<c:out value="${defense.id}"/>' >
+									  		<c:out value="${defense.date}"/>
+									  	</option>
+									</c:otherwise>
+								</c:choose>
 
 						   </c:if>				   						   
 						</c:forEach>
@@ -151,7 +176,7 @@
 
 	</div>
 	
-<div id="detail-juries">
+<div id="detail-juries" style="display:none">
 	<div class="row" id="row-juries">
 		<div class="col-md-3">
 		 	<div class="panel panel-primary">
@@ -251,10 +276,8 @@
 	</div><!-- End detail-juries -->
 
 </div>
-<c:forEach items="${listStudentDefense}" var="ldf"> 
-	<p><c:out value="${ldf.superviseStudent.name}"/> - <c:out value="${ldf.president}"/></p>
-</c:forEach>
-<div id="box-list-jury">
+
+<div id="box-list-jury" style="display:none">
 				<table id="list-jury" class="table table-hover">
 				<c:forEach items="${listStudentDefense}" var="ldf"> 
 				<tr>
@@ -446,13 +469,230 @@
 				</c:forEach>
 				</table>
 			</div>
+<button type="button" class="btn btn-default btn-lg" id="btn-shift-left">
+	<span class="glyphicon glyphicon-circle-arrow-left btn-arrow" aria-hidden="true"></span>
+</button>
+<button type="button" class="btn btn-default btn-lg" id="btn-shift-right">
+<span class="glyphicon glyphicon-circle-arrow-right btn-arrow" aria-hidden="true"></span>
+</button>
+<span id="outtext"></span>
+<div id="box-list-jury-2">
+	
+				<table id="list-jury-2" class="table table-hover">
+				<tr>
+					<th> </th>
+					<th>Họ tên</th>
+					<th>SHSV</th>
+					<th>Đề tài</th>
+					<th>GVHD</th>
+					<th>Chủ tịch</th>
+					<th>Phản biện 1</th>
+					<th>Phản biện 2</th>
+					<th>Thư kí</th>
+					<th>Ủy viên</th>
+					<th>Kíp</th>
+					<th>Phòng</th>
+					<th></th>
+					
+				</tr>
+				<c:forEach items="${listStudentDefense}" var="ldf"> 
+
+				<tr>
+					<!-- <td>
+					    <input type="checkbox"> 
+					</td> -->
+					<td>
+						<div class="">
+						    <label>
+						      <input type="checkbox"> 
+						    </label>
+						</div>
+						<input type="hidden" value='<c:out value="${ldf.id}"/>' class="defenseId">
+					</td>
+					<td>
+						<c:out value="${ldf.superviseStudent.name}"/>
+					</td>
+					<td>	
+						<c:out value="${ldf.superviseStudent.studentID}"/>
+					</td>
+					<td>
+						<c:out value="${ldf.superviseStudent.title}"/>
+						    
+					</td>
+					<td>
+						<c:out value="${ldf.supervisor.name}"/>
+					</td>
+					<td>
+						
+						<div class="form-group has-feedback">
+						    
+						        <select class="form-control professor president">		
+						        	<c:if test="${ldf.president == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.president.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+								<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+						</div>
+						</td>
+						<td>
+					
+						    <div class="form-group">
+						        <select class="form-control professor examiner1">		
+						        	<c:if test="${ldf.examiner1 == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.examiner1.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						    </div>
+						</td>
+						<td>
+							<div class="form-group">
+						    	<select class="form-control professor examiner2">	
+						        	<c:if test="${ldf.examiner2 == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.examiner2.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						    </div>
+						</td>
+						<td>
+						
+							<div class="form-group">						    
+						        <select class="form-control professor secretary">		
+						        	<c:if test="${ldf.secretary == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.secretary.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						    </div>
+						</td>
+						<td>
+						
+
+						
+						    <div class="form-group">
+						        <select class="form-control professor additionalMember">		
+						        	<c:if test="${ldf.additionalMember == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listProfessors}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.additionalMember.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						    </div>
+						</td>
+						<td>
+						    <div class="form-group">
+						        <select class="form-control slot">		
+						        	<c:if test="${ldf.slot == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listSlot}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.slot.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/><!--  --- Từ <c:out value="${ps.start}"/> đến <c:out value="${ps.end}"/> --></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/><!--  --- Từ <c:out value="${ps.start}"/> đến <c:out value="${ps.end}"/> --></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						    </div>
+						</td>
+						<td>
+						
+						    <div class="form-group">
+						        <select class="form-control room">		
+						        	<c:if test="${ldf.room == null}">
+						        		<option value='' selected>-------</option>
+						        	</c:if>				        	
+							        <c:forEach items="${listRoom}" var="ps"> 									
+										<c:choose>
+									  		<c:when test="${ps.id == ldf.room.id}">
+										       <option class="opt" selected value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+										    </c:when>
+										    <c:otherwise>
+										    	<option class="opt" value='<c:out value="${ps.id}"/>'><c:out value="${ps.name}"/></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>	
+								</select>
+						   </div>
+						</td>
+						<td>
+						
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-ok save" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-minus remove" aria-hidden="true"></span>
+						</button>
+					</td>
+					
+					
+				</tr>
+				</c:forEach>
+				</table>
+			</div>
+
+
+
+
 </div><!-- End containner -->
  <button type="button" class="btn btn-default" id="backToTopBtn">
   <span class="glyphicon glyphicon-arrow-up"></span> Top
 </button>
 <script src="<c:url value="/assets/js/jquery-1.11.1.js"/>"></script>
+<script src="<c:url value="/assets/js/jquery.mCustomScrollbar.concat.min.js"/>"></script>
+<script src="<c:url value="/assets/js/jquery.mCustomScrollbar.js"/>"></script>
 <%--  <script src="<c:url value="/assets/js/schedule.js"/>"></script> --%>
 <script type="text/javascript">
+	
 	function Professor(id, name){
 		this.name = name;
 		this.id = id;
@@ -467,4 +707,26 @@
 		listProfessor.push(p);	
 		$("#list-teacher").append(p.htmlItemList);
 	</c:forEach>	
+
+	
+	
+	(function($){
+        $(window).load(function(){
+        	$("#box-list-jury-2").mCustomScrollbar({ 
+				axis:"x",
+				scrollbarPosition:"outside",
+				theme:"dark-thin"
+			});
+           
+        });
+        $("#btn-shift-left").bind("click",function(event) {
+		/* Act on the event */
+			 $("#box-list-jury-2").mCustomScrollbar("scrollTo","left");
+		});
+		$("#btn-shift-right").bind("click",function(event) {
+		/* Act on the event */
+			 $("#box-list-jury-2").mCustomScrollbar("scrollTo","right");
+		});
+    })(jQuery);
 </script>
+

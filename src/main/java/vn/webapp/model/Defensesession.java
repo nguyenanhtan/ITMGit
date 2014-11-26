@@ -26,7 +26,7 @@ public class Defensesession {
 	@Column(name = "date", nullable = false)
 	private String date;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="sessionID", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="session", cascade = CascadeType.ALL)
     private Set<StudentDefense> sessionIDStudent;
 	
 	public Set<StudentDefense> getSessionIDStudent() {

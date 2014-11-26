@@ -42,11 +42,17 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 		// TODO Auto-generated method stub
 		return (SuperviseStudent) sessionFactory.getCurrentSession().get(SuperviseStudent.class, id);
 	}
+	@Override
+	public StudentDefense findStudentDefenseById(String id) {
+		// TODO Auto-generated method stub
+		return (StudentDefense) sessionFactory.getCurrentSession().get(StudentDefense.class, id);
+	}
 
 	@Override
-	public void updateSuperviseStudent(SuperviseStudentDetail superviseStudent) {
+	public void updateStudentDefense(StudentDefense superviseStudent) {
 		// TODO Auto-generated method stub
-		SuperviseStudent upStudent = (SuperviseStudent)sessionFactory.getCurrentSession().get(SuperviseStudent.class, superviseStudent.getId());
+		sessionFactory.getCurrentSession().update(superviseStudent);
+		/*SuperviseStudent upStudent = (SuperviseStudent)sessionFactory.getCurrentSession().get(SuperviseStudent.class, superviseStudent.getId());
 		upStudent.setTitle(superviseStudent.getTitle());		
 		sessionFactory.getCurrentSession().update(upStudent);
 		Professor ps = (Professor)sessionFactory.getCurrentSession().get(Professor.class, superviseStudent.getSupervisor());
@@ -58,7 +64,7 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 			sd = results.get(0);
 		}
 		sd.setSupervisor(ps);
-		sessionFactory.getCurrentSession().update(ps);
+		sessionFactory.getCurrentSession().update(ps);*/
 				
 	}
 
@@ -85,7 +91,14 @@ public class SuperviseStudentDAOImpl implements SuperviseStudentDAO {
 //		sessionFactory.getCurrentSession().getTransaction().commit();
 		return q.list();
 	}
-
+	@Override
+	public List<StudentDefense> listStudentDefense(String id) {
+		// TODO Auto-generated method stub
+		SQLQuery q = sessionFactory.getCurrentSession().createSQLQuery("SELECT * FROM student_defense WHERE SessionID = "+id);
+		q.addEntity(StudentDefense.class);
+//		sessionFactory.getCurrentSession().getTransaction().commit();
+		return q.list();
+	}
 	@Override
 	public List<Classes> listClass() {
 		// TODO Auto-generated method stub

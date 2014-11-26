@@ -32,3 +32,6 @@ SELECT *
 FROM student_defense_detail
 INNER JOIN professors ON professors.ID =  `student_defense_detail`.`Supervisor` 
 LIMIT 0 , 30
+
+Hướng dẫn sử dụng plugin scroll
+http://manos.malihu.gr/jquery-custom-content-scroller/

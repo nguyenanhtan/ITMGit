@@ -34,3 +34,45 @@
 #list-jury  td{
 	width: 25%;
 }
+.table{
+	max-width: none!important;
+}
+td{
+	white-space: nowrap;
+}
+td .form-control{
+	width: auto;
+}
+.form-group{
+	margin-bottom:0px!important;
+}
+#box-list-jury-2{
+	position: relative;
+	border: 1px solid #DDD;
+}
+.mCustomScrollBox+.mCSB_scrollTools.mCSB_scrollTools_horizontal {
+top: 30px;
+}
+.btn-arrow{
+
+}
+#btn-shift-left{
+	position: fixed;
+	top: 200px;
+	left: 20px;
+	display: none;
+}
+#btn-shift-right{
+	position: fixed;
+	top: 200px;
+	right: 20px;
+	display: none;
+}
+.has-error{
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+}
+.form-control-feedback{
+	top:0px!important;
+	right: 15px!important;
+}

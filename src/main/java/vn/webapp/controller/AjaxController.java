@@ -25,6 +25,7 @@ import vn.webapp.model.Institutes;
 import vn.webapp.model.Professor;
 import vn.webapp.model.Room;
 import vn.webapp.model.Slot;
+import vn.webapp.model.StudentDefense;
 import vn.webapp.model.SubjectCategory;
 import vn.webapp.model.SuperviseStudent;
 import vn.webapp.model.SuperviseStudentDetail;
@@ -357,18 +358,86 @@ public class AjaxController {
 	}
 	@RequestMapping(value = "/updateSubject", method = RequestMethod.GET)
     public @ResponseBody
-    SuperviseStudentDetail updateSubject(@RequestParam(value = "id") String id, @RequestParam(value = "sub") String sub, @RequestParam(value = "spv") String spv) {
-		if(sub.length() > 0)
-		{
-			SuperviseStudentDetail lStudent = new SuperviseStudentDetail();
-			lStudent.setId(id);
-			lStudent.setTitle(sub);
-			lStudent.setSupervisor(spv);
-			supStudentSvc.updateSuperviseStudent(lStudent);
-			return lStudent;
-		}else{
-			return null;
+    void updateSubject(
+    		@RequestParam(value = "id") String id, 
+    		@RequestParam(value = "sub") String sub, 
+    		@RequestParam(value = "spv") String spv, 
+    		@RequestParam(value = "def") String def) {
+		//System.out.println("id:"+id+" sub:"+sub+"spv: "+spv+"def: "+def);
+		
+		StudentDefense lStudent = supStudentSvc.findStudentDefenseById(id);
+		
+		
+		SuperviseStudent sps = lStudent.getSuperviseStudent();
+		sps.setTitle(sub);
+		lStudent.setSuperviseStudent(sps);
+		
+		lStudent.setTitle(sub);
+		
+		if(!spv.equals("")&&spv!=null){
+			Professor p = new Professor();
+			p.setId(spv);
+			lStudent.setSupervisor(p);
 		}
+		if(!def.equals("")&&def!=null){
+			Defensesession df = new Defensesession();
+			df.setId(def);
+			lStudent.setSession(df);
+		}
+		
+		supStudentSvc.updateStudentDefense(lStudent);
 
+	}
+	@RequestMapping(value = "/updateDefenseStudent", method = RequestMethod.GET)
+    public @ResponseBody
+    void updateDefenseStudent(
+    		@RequestParam(value = "defenseId") String defenseId, 
+    		@RequestParam(value = "president") String president, 
+    		@RequestParam(value = "examiner1") String examiner1, 
+    		@RequestParam(value = "examiner2") String examiner2,
+    		@RequestParam(value = "secretary") String secretary,
+    		@RequestParam(value = "additionalMember") String additionalMember,
+    		@RequestParam(value = "slot") String slot,
+    		@RequestParam(value = "room") String room) {
+		
+		System.out.println(defenseId);
+		System.out.println(president);
+		System.out.println(examiner1);
+		System.out.println(examiner2);
+		System.out.println(secretary);
+		System.out.println(additionalMember);
+		System.out.println(slot);
+		System.out.println(room);
+		
+		Professor prd = new Professor();
+		prd.setId(president);
+		
+		Professor ex1 = new Professor();
+		ex1.setId(examiner1);
+		
+		Professor ex2 = new Professor();
+		ex2.setId(examiner2);
+		
+		Professor sec = new Professor();
+		sec.setId(secretary);
+		
+		Professor addM = new Professor();
+		addM.setId(additionalMember);
+		
+		Slot sl = new Slot();
+		sl.setId(slot);
+		
+		Room rm = new Room();
+		rm.setId(room);
+		
+		StudentDefense sdf = supStudentSvc.findStudentDefenseById(defenseId);		
+		sdf.setPresident(prd);
+		sdf.setExaminer1(ex1);
+		sdf.setExaminer2(ex2);
+		sdf.setSecretary(sec);
+		sdf.setAdditionalMember(addM);
+		sdf.setSlot(sl);
+		sdf.setRoom(rm);
+		supStudentSvc.updateStudentDefense(sdf);		
 	}
 }

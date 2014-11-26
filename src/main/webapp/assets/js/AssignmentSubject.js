@@ -1,24 +1,32 @@
 $("#btn-save").click(function(){
 
 	$(".sub-name").each(function(){
-		sub = $(this).val();
-		id = $(this).siblings(".id-st").val();
-		spv = $(this).parent("td").next("td").children('.spv-name').val();
-		$.ajax({
-			url:'updateSubject.json',
-			data:{"sub":sub,"id":id,"spv":spv},
-			dataType: "json",
-			success:function(s,x){	
-				if(!$("#alert-mes").children(".alert").is(":visible"))
-				{
-					alertSuccess("Update success! ");
+		flag = $(this).siblings(".flag-change").val();
+		if(flag == 1){
+			sub = $(this).val();
+			id = $(this).siblings(".id-def").val();
+			spv = $(this).parent("td").next("td").children('.spv-name').val();
+			def = $(this).parents("tr").find(".session-defense").val();
+			$.ajax({
+				url:'updateSubject.json',
+				data:{"sub":sub,"id":id,"spv":spv,"def":def},
+				dataType: "html",
+				success:function(s,x){	
+					if(!$("#alert-mes").children(".alert").is(":visible"))
+					{
+						alertSuccess("Update success! ");
+					}
+				},
+				error:function(data, textStatus, jqXHR){
+					alertWarning(textStatus);
 				}
-			},
-			error:function(data, textStatus, jqXHR){
-				alertWarning(textStatus);
-			}
-		});
+			});
+		}
 	});
+});
+$(".row-st input, .row-st select").change(function(event) {
+	/* Act on the event */
+	$(this).parents(".row-st").find('.flag-change').val(1);
 });
 $("#st-name").on("input",function(){
 	$.ajax({

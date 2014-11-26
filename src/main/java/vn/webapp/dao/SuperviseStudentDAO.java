@@ -16,7 +16,7 @@ public interface SuperviseStudentDAO {
 	  
 	SuperviseStudent findSuperviseStudentById(String id);
 	  
-	void updateSuperviseStudent(SuperviseStudentDetail superviseStudent);
+	void updateStudentDefense(StudentDefense superviseStudent);
 	  
 	void deleteSuperviseStudent(SuperviseStudent superviseStudent);
 	List<SuperviseStudent> listSuperviseStudent();
@@ -26,4 +26,6 @@ public interface SuperviseStudentDAO {
 	List<Type> listType();
 	List<Status> listStatus();
 	List<StudentDefense> listStudentDefense();
+	StudentDefense findStudentDefenseById(String id);
+	List<StudentDefense> listStudentDefense(String id);
 }
